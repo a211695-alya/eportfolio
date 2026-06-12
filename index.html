@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A211695 - Mobile Programming Development e-Portfolio</title>
+
+<style>
+
+:root{
+    --pink:#E89AAA;
+    --pink-dark:#D97F95;
+    --pink-light:#FFF0F3;
+    --cream:#FFFDFB;
+    --grey:#4B5563;
+    --border:#F5D5DD;
+    --white:#FFFFFF;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:linear-gradient(
+    to bottom,
+    #fffdfb,
+    #fff8fa
+    );
+    color:var(--grey);
+    overflow-x:hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:var(--pink);
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+    background:#fff;
+}
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(12px);
+    padding:18px;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.05);
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--grey);
+    font-weight:600;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:var(--pink);
+}
+
+/* HERO */
+
+.hero{
+    min-height:75vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    background:
+    radial-gradient(
+    circle at top left,
+    #fff0f4,
+    #fffdfb
+    );
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.hero h1{
+    font-size:3.2rem;
+    color:var(--pink);
+    margin-bottom:15px;
+}
+
+.hero h2{
+    font-size:1.2rem;
+    font-weight:500;
+    margin-bottom:20px;
+}
+
+.hero p{
+    margin-bottom:8px;
+    font-size:1rem;
+}
+
+.hero-badge{
+    display:inline-block;
+    margin-top:25px;
+    padding:12px 25px;
+
+    background:var(--pink);
+
+    color:white;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    box-shadow:
+    0 10px 25px
+    rgba(232,154,170,.25);
+}
+
+/* GENERAL */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+section{
+    margin:70px 0;
+}
+
+.section-title{
+    text-align:center;
+    color:var(--pink);
+    font-size:2rem;
+    margin-bottom:35px;
+    font-weight:700;
+}
+
+.section-title::after{
+    content:'';
+    display:block;
+    width:60px;
+    height:3px;
+    background:var(--pink);
+    margin:10px auto;
+    border-radius:20px;
+}
+
+/* CARDS */
+
+.card{
+    background:white;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    border:1px solid var(--border);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.05);
+
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+
+    box-shadow:
+    0 20px 40px rgba(232,154,170,0.18);
+}
+
+/* PROFILE */
+
+.profile p{
+    margin-bottom:10px;
+}
+
+.quote{
+    margin-top:18px;
+
+    border-left:4px solid var(--pink);
+
+    padding-left:15px;
+
+    font-style:italic;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:25px;
+}
+
+/* VIDEO CARD */
+
+.video-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:15px;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+.video-card img{
+    width:100%;
+    display:block;
+    transition:0.5s ease;
+}
+
+.video-card:hover img{
+    transform:scale(1.08);
+}
+
+.video-card:hover{
+    box-shadow:
+    0 12px 30px rgba(232,154,170,0.25);
+}
+
+.play{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:var(--pink);
+
+    font-size:30px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:bold;
+}
+
+/* BUTTON */
+
+.btn{
+    display:block;
+
+    text-align:center;
+
+    margin-top:15px;
+
+    background:var(--pink);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:var(--pink-dark);
+}
+
+/* SKILLS */
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+.skill{
+    padding:10px 18px;
+
+    border-radius:25px;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    color:var(--pink);
+
+    transition:0.3s;
+}
+
+.skill:hover{
+    background:var(--pink);
+    color:white;
+}
+
+/* LIST */
+
+ul{
+    padding-left:20px;
+}
+
+li{
+    margin-bottom:10px;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:70px;
+
+    background:var(--pink-light);
+
+    padding:35px;
+
+    text-align:center;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:2.2rem;
+}
+
+.hero h2{
+    font-size:1rem;
+}
+
+nav{
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="#profile">Profile</a>
+<a href="#labs">Labs</a>
+<a href="#projects">Projects</a>
+<a href="#reflection">Reflection</a>
+<a href="#skills">Skills</a>
+</nav>
+
+<header class="hero">
+
+<div class="hero-content">
+
+<h1>Mobile Programming Development</h1>
+
+<h2>e-Portfolio</h2>
+
+<p><strong>LyaDrive</strong></p>
+
+<div class="hero-badge">
+SDG 11 - Sustainable Cities and Communities
+</div>
+
+</div>
+
+</header>
+
+<div class="container">
+<!-- STUDENT PROFILE -->
+
+<section id="profile">
+
+<h2 class="section-title">Student Profile</h2>
+
+<div class="card profile">
+
+<p><strong>Name:</strong> Nur Alya Nabilah Binti Abdul Razak</p>
+
+<p><strong>Matric Number:</strong> A211695</p>
+
+<p><strong>Programme:</strong> Bachelor of Information Technology</p>
+
+<p><strong>Class:</strong> 2IT2</p>
+
+<p><strong>Instructor:</strong> Dr. Nazatul Aini</p>
+
+<p><strong>Learning Goal:</strong> To improve my knowledge and practical skills in Android application development using Kotlin and Jetpack Compose.</p>
+
+<p><strong>Chosen SDG:</strong> SDG 11 - Sustainable Cities and Communities.</p>
+
+<div class="quote">
+This e-Portfolio presents my learning journey throughout Mobile Programming Development, from Lab 1 until Project 2.
+</div>
+
+</div>
+
+</section>
+
+<!-- LAB SUBMISSIONS -->
+
+<section id="labs">
+
+<h2 class="section-title">Lab Submissions</h2>
+
+<div class="grid">
+
+<!-- LAB 1 -->
+
+<div class="card">
+
+<h3>Lab 1 - Basic UI Layout</h3>
+
+<p>
+Learned how to build and arrange user interface components using Jetpack Compose.
+</p>
+
+<a href="https://youtu.be/QwnqRgpFLI0" target="_blank">
+
+<div class="video-card">
+
+<img src="https://img.youtube.com/vi/QwnqRgpFLI0/hqdefault.jpg" alt="Lab 1">
+
+<div class="play">▶</div>
+
+</div>
+
+</a>
+
+</div>
+
+<!-- LAB 2 -->
+
+<div class="card">
+
+<h3>Lab 2 - State Interaction</h3>
+
+<p>
+Learned how to manage state and update the user interface dynamically.
+</p>
+
+<a href="https://youtu.be/063Ch9ZE3rk" target="_blank">
+
+<div class="video-card">
+
+<img src="https://img.youtube.com/vi/063Ch9ZE3rk/hqdefault.jpg" alt="Lab 2">
+
+<div class="play">▶</div>
+
+</div>
+
+</a>
+
+</div>
+
+<!-- LAB 3 -->
+
+<div class="card">
+
+<h3>Lab 3 - Material Design</h3>
+
+<p>
+Applied Material Design principles including themes, colors and typography.
+</p>
+
+<a href="https://youtu.be/3nUmaDmcenY" target="_blank">
+
+<div class="video-card">
+
+<img src="https://img.youtube.com/vi/3nUmaDmcenY/hqdefault.jpg" alt="Lab 3">
+
+<div class="play">▶</div>
+
+</div>
+
+</a>
+
+</div>
+
+<!-- LAB 4 -->
+
+<div class="card">
+
+<h3>Lab 4 - Navigation</h3>
+
+<p>
+Implemented navigation between screens using Compose Navigation.
+</p>
+
+<a href="https://youtu.be/cau69qygEW8" target="_blank">
+
+<div class="video-card">
+
+<img src="https://img.youtube.com/vi/cau69qygEW8/hqdefault.jpg" alt="Lab 4">
+
+<div class="play">▶</div>
+
+</div>
+
+</a>
+
+</div>
+
+<!-- LAB 5 -->
+
+<div class="card">
+
+<h3>Lab 5 - Room Database</h3>
+
+<p>
+Learned how to store and retrieve local data using Room Database.
+</p>
+
+<a href="https://youtu.be/CpSnZYFjsEs" target="_blank">
+
+<div class="video-card">
+
+<img src="https://img.youtube.com/vi/CpSnZYFjsEs/hqdefault.jpg" alt="Lab 5">
+
+<div class="play">▶</div>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<h2 class="section-title">Project Submissions</h2>
+
+<div class="grid">
+
+<!-- PROJECT 1 -->
+
+<div class="card">
+
+<h3>Project 1</h3>
+
+<br>
+
+<p>
+<strong>Problem Statement:</strong><br>
+Users need an easier way to access information related to environmental awareness activities and community programmes.
+</p>
+
+<br>
+
+<p>
+<strong>Solution:</strong><br>
+Developed a multi-screen Android application using Jetpack Compose and ViewModel architecture.
+</p>
+
+<a href="https://youtu.be/AnfWN8JKEoE" target="_blank">
+
+<div class="video-card">
+
+<img src="https://img.youtube.com/vi/AnfWN8JKEoE/hqdefault.jpg" alt="Project 1">
+
+<div class="play">▶</div>
+
+</div>
+
+</a>
+
+<a class="btn"
+href="https://github.com/a211695-alya/A211695_Alya_DrNazatul_Project-1"
+target="_blank">
+
+View GitHub Repository
+
+</a>
+
+<p style="margin-top:15px;">
+<strong>Lessons Learned:</strong><br>
+Improved understanding of UI design, screen navigation and application architecture.
+</p>
+
+</div>
+
+<!-- PROJECT 2 -->
+
+<div class="card">
+
+<h3>Project 2</h3>
+
+<br>
+
+<p>
+<strong>Problem Statement:</strong><br>
+Smart city applications require real-time information, cloud integration and device interaction.
+</p>
+
+<br>
+
+<p>
+<strong>Solution:</strong><br>
+Developed a connected application using API integration, Firebase services and mobile device sensors.
+</p>
+
+<a href="https://youtu.be/k_w22RE6NzM" target="_blank">
+
+<div class="video-card">
+
+<img src="https://img.youtube.com/vi/k_w22RE6NzM/hqdefault.jpg" alt="Project 2">
+
+<div class="play">▶</div>
+
+</div>
+
+</a>
+
+<a class="btn"
+href="https://github.com/a211695-alya/A211695_Alya_DrNazatul_Project-2"
+target="_blank">
+
+View GitHub Repository
+
+</a>
+
+<p style="margin-top:15px;">
+<strong>Lessons Learned:</strong><br>
+Learned API integration, Firebase implementation and sensor-based application development.
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- REFLECTION -->
+
+<section id="reflection">
+
+<h2 class="section-title">Reflection & Learning Journey</h2>
+
+<div class="card">
+
+<p>
+This course helped me gain practical experience in Android application development using Kotlin and Jetpack Compose.
+</p>
+
+<br>
+
+<p>
+In Lab 1, I learned how to create simple user interfaces and arrange components properly. As I progressed through the labs, I learned state management, Material Design, navigation and local database development.
+</p>
+
+<br>
+
+<p>
+One of the biggest challenges was integrating APIs, Firebase services and device sensors in Project 2. Solving these challenges improved my problem-solving skills and confidence in mobile application development.
+</p>
+
+<br>
+
+<p>
+Through this learning journey, I gained a better understanding of how technology can support SDG 11 by providing smarter and more accessible digital solutions for communities.
+</p>
+
+<br>
+
+<p>
+Overall, this course strengthened both my technical knowledge and practical development skills, preparing me for future software development projects.
+</p>
+
+</div>
+
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+<h2 class="section-title">Skills & Tech Stack</h2>
+
+<div class="skills">
+
+<div class="skill">Kotlin</div>
+
+<div class="skill">Jetpack Compose</div>
+
+<div class="skill">Android Studio</div>
+
+<div class="skill">ViewModel</div>
+
+<div class="skill">Compose Navigation</div>
+
+<div class="skill">Room Database</div>
+
+<div class="skill">Retrofit</div>
+
+<div class="skill">Firebase Firestore</div>
+
+<div class="skill">REST API</div>
+
+<div class="skill">Mobile Sensors</div>
+
+</div>
+
+</section>
+
+<!-- REFERENCES -->
+
+<section id="references">
+
+<h2 class="section-title">Resources & References</h2>
+
+<div class="card">
+
+<h3 style="color:#E89AAA; margin-bottom:15px;">
+Libraries & Technologies Used
+</h3>
+
+<ul>
+
+<li>Jetpack Compose</li>
+
+<li>Compose Navigation</li>
+
+<li>ViewModel Architecture</li>
+
+<li>Room Database</li>
+
+<li>Retrofit</li>
+
+<li>Firebase Firestore</li>
+
+<li>Android Studio</li>
+
+<li>Kotlin Programming Language</li>
+
+</ul>
+
+<br>
+
+<h3 style="color:#E89AAA; margin-bottom:15px;">
+AI Assistance Acknowledgement
+</h3>
+
+<ul>
+
+<li>
+Artificial Intelligence tools were used as learning aids to understand programming concepts, identify coding errors, improve layouts and support debugging during development.
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+<strong>LYADRIVE</strong>
+</p>
+
+<br>
+
+<p style="font-size:0.9rem; opacity:0.8;">
+© 2026 All Rights Reserved
+</p>
+
+</footer>
+
+</body>
+</html>
